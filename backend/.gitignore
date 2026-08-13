@@ -1,0 +1,10 @@
+# Backend .gitignore
+.env
+.env.local
+.venv/
+__pycache__/
+*.pyc
+db.sqlite3
+staticfiles/
+logs/
+*.log
