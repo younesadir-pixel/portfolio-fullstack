@@ -35,6 +35,15 @@ class ContactMessageView(APIView):
     Saves message to database first and attempts email notification without failing if SMTP is offline.
     """
 
+    def get(self, request, *args, **kwargs):
+        return Response({
+            'status': 'active',
+            'endpoint': '/api/contact/',
+            'method': 'POST',
+            'required_fields': ['name', 'email', 'subject', 'message'],
+            'description': 'Submit contact messages via POST. Messages are stored in the database and email notifications are sent.'
+        }, status=status.HTTP_200_OK)
+
     def post(self, request, *args, **kwargs):
         serializer = MessageSerializer(data=request.data)
         if serializer.is_valid():
@@ -65,3 +74,4 @@ class ContactMessageView(APIView):
             }, status=status.HTTP_201_CREATED)
             
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
