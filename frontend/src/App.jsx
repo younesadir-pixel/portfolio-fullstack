@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { getApiUrl } from './api';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -14,7 +15,7 @@ export default function App() {
     const sessionKey = 'portfolio_visit_recorded';
     if (!sessionStorage.getItem(sessionKey)) {
       sessionStorage.setItem(sessionKey, 'true');
-      fetch('/api/track-visit/', {
+      fetch(getApiUrl('/api/track-visit/'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
